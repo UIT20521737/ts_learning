@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hiển thị Code TypeScript</title>
+        <!-- Thêm CSS của Prism.js -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css"
+        />
+        <style>
+            pre {
+                background: #f4f4f4;
+                padding: 10px;
+                border-radius: 5px;
+                overflow-x: auto;
+            }
+            code {
+                font-family: monospace;
+            }
+            #output {
+                margin-top: 20px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background: #f9f9f9;
+                white-space: pre-wrap; /* Giữ định dạng dòng */
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Mã Code từ TypeScript</h1>
+        <!-- Khu vực hiển thị khung code -->
+        <div id="code-output"></div>
+        <!-- Khu vực hiển thị kết quả thực thi -->
+        <h2>Kết quả thực thi:</h2>
+        <div id="output"></div>
+
+        <!-- Ghi đè console.log để thu thập và hiển thị kết quả -->
+        <script>
+            // Mảng để lưu các thông điệp console.log
+            const consoleLogs = [];
+            // Ghi đè console.log
+            const originalConsoleLog = console.log;
+            console.log = (...args) => {
+                // Gọi console.log gốc để vẫn in ra DevTools
+                originalConsoleLog.apply(console, args);
+                // Thêm thông điệp vào mảng
+                consoleLogs.push(args.join(' '));
+                // Cập nhật nội dung trong #output
+                const output = document.getElementById('output');
+                if (output) {
+                    output.textContent = consoleLogs.join('\n');
+                }
+            };
+        </script>
+
+        <!-- Load file index.js để hiển thị khung code -->
+        <script src="./dist/index.js"></script>
+        <!-- Load file script.js để thực thi code -->
+        <script src="./dist/script.js"></script>
+
+        <!-- Thêm Prism.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <!-- Hỗ trợ JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+        <!-- Hỗ trợ TypeScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    </body>
+</html>
