@@ -4,12 +4,17 @@
     "scripts": {
         "build": "tsc",
         "watch": "tsc --watch",
-        "start": "nodemon dist/script.js",
+        "start": "nodemon server.js",
         "dev": "concurrently \"npm run watch\" \"npm run start\""
     },
     "devDependencies": {
         "concurrently": "^8.2.2",
         "nodemon": "^3.0.0",
         "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "chokidar": "^4.0.3",
+        "express": "^5.1.0",
+        "ws": "^8.18.1"
     }
 }
